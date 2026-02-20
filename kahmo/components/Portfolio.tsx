@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import type { PortfolioClient } from "@/types";
 
@@ -36,20 +36,9 @@ const mockData: PortfolioClient[] = [
 ];
 
 export default function Portfolio() {
-  const [clients, setClients] = useState<PortfolioClient[]>(mockData);
+  const [clients] = useState<PortfolioClient[]>(mockData);
   const [selected, setSelected] = useState<PortfolioClient | null>(null);
   const [lightboxImg, setLightboxImg] = useState<string | null>(null);
-
-  useEffect(() => {
-    fetch("/api/portfolio")
-      .then((r) => r.json())
-      .then((data: PortfolioClient[]) => {
-        if (data && data.length > 0) setClients(data);
-      })
-      .catch(() => {
-        // keep mock data on error
-      });
-  }, []);
 
   return (
     <section id="portfolio" className="px-6 md:px-12 lg:px-20 py-24 md:py-32">
