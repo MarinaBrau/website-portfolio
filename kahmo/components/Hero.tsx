@@ -121,13 +121,13 @@ export default function Hero() {
         </p>
 
         {/* Social icons */}
-        <div className="flex items-center gap-5 hero-animate" style={{ animationDelay: "400ms" }}>
+        <div className="flex items-center gap-8 hero-animate" style={{ animationDelay: "400ms" }}>
           {/* Instagram */}
           <a
             href={instagramUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex flex-col items-center gap-2 group"
+            className="flex flex-col items-center gap-2.5 group"
             aria-label="Instagram @kahmo.ag"
           >
             <div
@@ -150,7 +150,7 @@ export default function Hero() {
                 <circle cx="17.5" cy="6.5" r="0.5" fill="#191919" />
               </svg>
             </div>
-            <span className="text-xs uppercase tracking-widest" style={{ color: "#888" }}>
+            <span className="text-[10px] uppercase tracking-widest" style={{ color: "#666" }}>
               @kahmo.ag
             </span>
           </a>
@@ -160,36 +160,36 @@ export default function Hero() {
             href="https://linkedin.com/in/kamillafreitas"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex flex-col items-center gap-2 group"
+            className="flex flex-col items-center gap-2.5 group"
             aria-label="LinkedIn Kamilla Freitas"
           >
             <div
               className="w-12 h-12 rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:brightness-110"
-              style={{ background: "#0A66C2" }}
+              style={{ background: "#ffa5da" }}
             >
               <svg
-                width="22"
-                height="22"
+                width="20"
+                height="20"
                 viewBox="0 0 24 24"
-                fill="#fff"
+                fill="#191919"
                 aria-hidden="true"
               >
                 <path d="M20.447 20.452H17.21v-5.569c0-1.328-.025-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.989V9h3.105v1.561h.043c.433-.82 1.49-1.684 3.066-1.684 3.276 0 3.88 2.156 3.88 4.963v6.612zM5.337 7.433a1.8 1.8 0 1 1 0-3.6 1.8 1.8 0 0 1 0 3.6zm1.555 13.019H3.78V9h3.112v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
               </svg>
             </div>
-            <span className="text-xs uppercase tracking-widest" style={{ color: "#888" }}>
+            <span className="text-[10px] uppercase tracking-widest" style={{ color: "#666" }}>
               LinkedIn
             </span>
           </a>
         </div>
       </div>
 
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-40 hero-animate" style={{ animationDelay: "500ms" }}>
+      {/* Scroll indicator — separado do conteúdo, com espaço garantido */}
+      <div className="relative z-10 flex flex-col items-center gap-2 pb-4 opacity-40 hero-animate" style={{ animationDelay: "500ms" }}>
         <span className="text-xs uppercase tracking-widest" style={{ color: "#888" }}>
           scroll
         </span>
-        <div className="w-px h-12 animate-pulse" style={{ background: "#ffa5da" }} />
+        <div className="w-px h-10 animate-pulse" style={{ background: "#ffa5da" }} />
       </div>
     </section>
   );
