@@ -1,18 +1,47 @@
 "use client";
 
+import { useMotionValue, useSpring, useTransform, motion } from "framer-motion";
+
 export default function Hero() {
   const instagramUrl = process.env.NEXT_PUBLIC_INSTAGRAM_URL ?? "#";
 
+  // Mouse tracking
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  // Blob 1 (pink, top-right) — move suave na direção do mouse
+  const blob1X = useSpring(useTransform(mouseX, (v) => v / 14), { stiffness: 40, damping: 20 });
+  const blob1Y = useSpring(useTransform(mouseY, (v) => v / 14), { stiffness: 40, damping: 20 });
+
+  // Blob 2 (cyan, bottom-left) — move na direção oposta, mais devagar
+  const blob2X = useSpring(useTransform(mouseX, (v) => -v / 22), { stiffness: 30, damping: 25 });
+  const blob2Y = useSpring(useTransform(mouseY, (v) => -v / 22), { stiffness: 30, damping: 25 });
+
+  function handleMouseMove(e: React.MouseEvent<HTMLElement>) {
+    const rect = e.currentTarget.getBoundingClientRect();
+    mouseX.set(e.clientX - rect.left - rect.width / 2);
+    mouseY.set(e.clientY - rect.top - rect.height / 2);
+  }
+
+  function handleMouseLeave() {
+    mouseX.set(0);
+    mouseY.set(0);
+  }
+
   return (
-    <section className="relative min-h-screen flex flex-col px-6 md:px-12 lg:px-20 py-10 overflow-hidden">
-      {/* Background decorative elements */}
-      <div
+    <section
+      className="relative min-h-screen flex flex-col px-6 md:px-12 lg:px-20 py-10 overflow-hidden"
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+    >
+      {/* Background decorative elements — parallax */}
+      <motion.div
         className="absolute top-0 right-0 w-96 h-96 rounded-full opacity-10 blur-3xl pointer-events-none"
-        style={{ background: "#ffa5da" }}
+        style={{ background: "#ffa5da", x: blob1X, y: blob1Y }}
       />
-      <div
+      <motion.div
         className="absolute bottom-20 left-10 w-64 h-64 rounded-full opacity-10 blur-3xl pointer-events-none"
-        style={{ background: "#90e5e6" }}
+        style={{ background: "#90e5e6", x: blob2X, y: blob2Y }}
       />
 
       {/* Nav */}
