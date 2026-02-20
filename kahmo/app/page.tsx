@@ -5,6 +5,7 @@ import Portfolio from "@/components/Portfolio";
 import SocialMedia from "@/components/SocialMedia";
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
+import FloatingButton from "@/components/FloatingButton";
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
       <SocialMedia />
       <ContactForm />
       <Footer />
+      <FloatingButton />
     </main>
   );
 }
