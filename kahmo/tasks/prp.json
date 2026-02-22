@@ -1,0 +1,133 @@
+{
+  "project": {
+    "name": "kahmo",
+    "description": "Portfolio com navegação por categorias — filtros client-side, navbar fixo, imagens via Google Drive",
+    "branchName": "feat/portfolio-navigation"
+  },
+  "features": [
+    {
+      "id": "F1",
+      "name": "Portfolio com categorias",
+      "description": "Filtros por categoria, navbar fixo e imagens do Google Drive",
+      "priority": 1,
+      "tasks": [
+        {
+          "id": "F1-T1",
+          "title": "Criar lib/portfolio-data.ts com tipos e dados",
+          "description": "Definir tipos PortfolioItem e PortfolioCategory. Exportar PORTFOLIO_ITEMS com itens reais mockados (2+ por categoria) e CATEGORIAS com labels. Remover mockData do Portfolio.tsx.",
+          "priority": 1,
+          "passes": false,
+          "context": {
+            "files": ["lib/portfolio-data.ts", "components/Portfolio.tsx", "types/index.ts"],
+            "libraries": [],
+            "hints": [
+              "Categorias: 'social-media' | 'identidade-visual' | 'design-grafico' | 'roteiro'",
+              "PortfolioItem: { id, categoria, titulo, cliente, descricao, imagens: string[] }",
+              "Imagens usam URL do Google Drive: https://lh3.googleusercontent.com/d/FILE_ID",
+              "CATEGORIAS = [{ valor: 'social-media', label: 'Social Media' }, ...]"
+            ]
+          },
+          "acceptance": [
+            "Arquivo lib/portfolio-data.ts criado com tipos exportados",
+            "PORTFOLIO_ITEMS contém pelo menos 2 itens por categoria (8 total)",
+            "CATEGORIAS exporta array com label e valor das 4 categorias",
+            "Typecheck passa"
+          ],
+          "tests": {
+            "command": "npm run build"
+          }
+        },
+        {
+          "id": "F1-T2",
+          "title": "Autorizar domínios do Google Drive no next.config.ts",
+          "description": "Adicionar lh3.googleusercontent.com e drive.google.com como remotePatterns no next.config.ts para que o Next.js Image component aceite as URLs.",
+          "priority": 2,
+          "passes": false,
+          "context": {
+            "files": ["next.config.ts"],
+            "libraries": [],
+            "hints": [
+              "Usar remotePatterns com hostname: 'lh3.googleusercontent.com'",
+              "Adicionar também drive.google.com como fallback",
+              "Formato: { protocol: 'https', hostname: '...', pathname: '/**' }"
+            ]
+          },
+          "acceptance": [
+            "lh3.googleusercontent.com adicionado em remotePatterns",
+            "drive.google.com adicionado em remotePatterns",
+            "npm run build passa sem erro de domínio não autorizado",
+            "Typecheck passa"
+          ],
+          "tests": {
+            "command": "npm run build"
+          }
+        },
+        {
+          "id": "F1-T3",
+          "title": "Reconstruir Portfolio.tsx com filtros e grid de cards",
+          "description": "Substituir o Portfolio.tsx atual por versão com: (1) tabs de filtro por categoria, (2) grid de cards com image+titulo+cliente+descricao, (3) lightbox ao clicar, (4) filtro ativo salvo em URL hash, (5) leitura do hash na montagem.",
+          "priority": 3,
+          "passes": false,
+          "context": {
+            "files": ["components/Portfolio.tsx", "lib/portfolio-data.ts"],
+            "libraries": ["framer-motion"],
+            "hints": [
+              "useState<'all' | PortfolioCategory> para filtro ativo",
+              "useEffect para ler window.location.hash na montagem",
+              "Ao trocar filtro: atualizar hash com window.location.hash = categoria",
+              "Lightbox com position fixed, backdrop rgba(0,0,0,0.95), botão fechar",
+              "Next.js Image com fill e object-cover nos cards",
+              "Filtro ativo: background #ffa5da, cor #191919",
+              "Filtro inativo: border #333, hover border-color #ffa5da"
+            ]
+          },
+          "acceptance": [
+            "Tab 'Todos' mostra todos os 8+ itens",
+            "Clicar em categoria filtra os cards instantaneamente",
+            "Cada card mostra: imagem, badge de categoria, título, cliente, descrição",
+            "Clicar na imagem abre lightbox fullscreen com botão fechar",
+            "URL hash atualiza ao trocar filtro (ex: #social-media)",
+            "Acessar /#social-media diretamente abre com filtro já ativo",
+            "Typecheck passa"
+          ],
+          "tests": {
+            "command": "npm run build"
+          }
+        },
+        {
+          "id": "F1-T4",
+          "title": "Criar Navbar.tsx fixo com links de categoria",
+          "description": "Criar componente Navbar fixo no topo que: fica oculto no hero, aparece com fade ao rolar, tem links das 4 categorias (scroll para #portfolio + ativa filtro via hash) e botão Orçamento. Mobile com hamburger.",
+          "priority": 4,
+          "passes": false,
+          "context": {
+            "files": ["components/Navbar.tsx", "app/page.tsx"],
+            "libraries": ["framer-motion"],
+            "hints": [
+              "useEffect + window.addEventListener('scroll') para detectar posição",
+              "Mostrar navbar quando scrollY > window.innerHeight * 0.8",
+              "motion.header com animate={{ opacity, y }} para transição suave",
+              "Link de categoria: onClick => { window.location.hash = cat; document.querySelector('#portfolio')?.scrollIntoView() }",
+              "Highlight do link ativo lendo window.location.hash",
+              "Mobile: estado booleano para abrir/fechar menu",
+              "Background: rgba(25,25,25,0.92) com backdrop-filter blur(20px)",
+              "Adicionar <Navbar /> no app/page.tsx antes do <Hero />"
+            ]
+          },
+          "acceptance": [
+            "Navbar invisível quando usuário está no hero (scrollY < 80vh)",
+            "Navbar aparece com animação ao rolar para além do hero",
+            "Links: logo + Social Media + Identidade Visual + Design Gráfico + Roteiro + Orçamento",
+            "Clicar em categoria faz scroll para #portfolio e ativa o filtro",
+            "Link da categoria ativa tem underline ou cor diferente",
+            "Mobile: hamburger abre menu com as mesmas opções",
+            "Typecheck passa"
+          ],
+          "tests": {
+            "command": "npm run build"
+          }
+        }
+      ]
+    }
+  ]
+}

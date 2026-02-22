@@ -14,9 +14,9 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const { nome, whatsapp, email } = parsed.data;
+    const { nome, whatsapp, email, mensagem } = parsed.data;
 
-    await sendLeadEmail({ nome, whatsapp, email });
+    await sendLeadEmail({ nome, whatsapp, email, mensagem });
 
     return NextResponse.json({ success: true });
   } catch (error) {

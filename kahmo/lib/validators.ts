@@ -11,6 +11,7 @@ export const contactSchema = z.object({
     .max(20, "WhatsApp inválido")
     .regex(/^[\d\s\(\)\-\+]+$/, "WhatsApp deve conter apenas números"),
   email: z.string().email("Email inválido").max(200, "Email muito longo"),
+  mensagem: z.string().max(1000, "Mensagem muito longa").optional(),
 });
 
 export type ContactSchema = z.infer<typeof contactSchema>;

@@ -1,41 +1,43 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import Image from "next/image";
-import type { PortfolioClient } from "@/types";
+import { useState } from 'react';
+import Image from 'next/image';
+import { useTranslations } from 'next-intl';
+import type { PortfolioClient } from '@/types';
 
 const mockData: PortfolioClient[] = [
   {
-    cliente: "Regional Vise Perj",
-    servico: "Social Media",
-    cor: "#ffa5da",
+    cliente: 'Regional Vise Perj',
+    servico: 'Social Media',
+    cor: '#ffa5da',
     imagens: [],
-    descricao: "Gestão completa das redes sociais com crescimento orgânico.",
+    descricao: 'Gestão completa das redes sociais com crescimento orgânico.',
   },
   {
-    cliente: "Greenbet.io",
-    servico: "Identidade Visual",
-    cor: "#66cb35",
+    cliente: 'Greenbet.io',
+    servico: 'Identidade Visual',
+    cor: '#66cb35',
     imagens: [],
-    descricao: "Identidade visual moderna para plataforma de apostas.",
+    descricao: 'Identidade visual moderna para plataforma de apostas.',
   },
   {
-    cliente: "Cliente 3",
-    servico: "Design Gráfico",
-    cor: "#90e5e6",
+    cliente: 'Cliente 3',
+    servico: 'Design Gráfico',
+    cor: '#90e5e6',
     imagens: [],
-    descricao: "Materiais gráficos para campanhas digitais.",
+    descricao: 'Materiais gráficos para campanhas digitais.',
   },
   {
-    cliente: "Cliente 4",
-    servico: "Roteiro",
-    cor: "#a95ae6",
+    cliente: 'Cliente 4',
+    servico: 'Roteiro',
+    cor: '#a95ae6',
     imagens: [],
-    descricao: "Roteiros criativos para Reels e YouTube.",
+    descricao: 'Roteiros criativos para Reels e YouTube.',
   },
 ];
 
 export default function Portfolio() {
+  const t = useTranslations('portfolio');
   const [clients] = useState<PortfolioClient[]>(mockData);
   const [selected, setSelected] = useState<PortfolioClient | null>(null);
   const [lightboxImg, setLightboxImg] = useState<string | null>(null);
@@ -47,18 +49,18 @@ export default function Portfolio() {
         <div className="mb-16">
           <p
             className="text-xs uppercase tracking-[0.4em] mb-4"
-            style={{ color: "#90e5e6" }}
+            style={{ color: '#90e5e6' }}
           >
-            Trabalhos
+            {t('eyebrow')}
           </p>
           <h2
             className="text-5xl md:text-6xl font-bold uppercase tracking-tighter leading-[0.95]"
             style={{
-              fontFamily: "var(--font-space-grotesk)",
-              color: "#e9e8e9",
+              fontFamily: 'var(--font-space-grotesk)',
+              color: '#e9e8e9',
             }}
           >
-            Portfolio
+            {t('heading')}
           </h2>
         </div>
 
@@ -82,7 +84,7 @@ export default function Portfolio() {
               <div className="flex justify-between items-start mb-4">
                 <div
                   className="w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm"
-                  style={{ background: client.cor, color: "#191919" }}
+                  style={{ background: client.cor, color: '#191919' }}
                 >
                   {client.cliente.charAt(0)}
                 </div>
@@ -100,15 +102,15 @@ export default function Portfolio() {
               <h3
                 className="text-xl font-bold uppercase tracking-tight mb-2"
                 style={{
-                  fontFamily: "var(--font-space-grotesk)",
-                  color: "#e9e8e9",
+                  fontFamily: 'var(--font-space-grotesk)',
+                  color: '#e9e8e9',
                 }}
               >
                 {client.cliente}
               </h3>
 
               {client.descricao && (
-                <p className="text-xs leading-relaxed" style={{ color: "#777" }}>
+                <p className="text-xs leading-relaxed" style={{ color: '#777' }}>
                   {client.descricao}
                 </p>
               )}
@@ -116,8 +118,8 @@ export default function Portfolio() {
               <div className="mt-4 flex items-center gap-1.5">
                 <span className="text-xs" style={{ color: client.cor }}>
                   {selected?.cliente === client.cliente
-                    ? "↑ Fechar"
-                    : "↓ Ver trabalhos"}
+                    ? t('toggleClose')
+                    : t('toggleOpen')}
                 </span>
               </div>
             </button>
@@ -137,7 +139,7 @@ export default function Portfolio() {
               <h4
                 className="text-lg font-bold uppercase tracking-tight"
                 style={{
-                  fontFamily: "var(--font-space-grotesk)",
+                  fontFamily: 'var(--font-space-grotesk)',
                   color: selected.cor,
                 }}
               >
@@ -146,9 +148,9 @@ export default function Portfolio() {
               <button
                 onClick={() => setSelected(null)}
                 className="text-sm hover:opacity-70 transition-opacity"
-                style={{ color: "#666" }}
+                style={{ color: '#666' }}
               >
-                ✕ Fechar
+                {t('closeButton')}
               </button>
             </div>
 
@@ -159,11 +161,11 @@ export default function Portfolio() {
                     key={i}
                     onClick={() => setLightboxImg(url)}
                     className="aspect-square rounded-xl overflow-hidden relative hover:opacity-90 transition-opacity"
-                    style={{ background: "#222" }}
+                    style={{ background: '#222' }}
                   >
                     <Image
                       src={url}
-                      alt={`${selected.cliente} — imagem ${i + 1}`}
+                      alt={`${selected.cliente} — ${i + 1}`}
                       fill
                       className="object-cover"
                       sizes="(max-width: 640px) 50vw, 33vw"
@@ -174,10 +176,10 @@ export default function Portfolio() {
             ) : (
               <div
                 className="py-12 text-center rounded-xl"
-                style={{ background: "#1e1e1e" }}
+                style={{ background: '#1e1e1e' }}
               >
-                <p className="text-sm" style={{ color: "#555" }}>
-                  Imagens em breve
+                <p className="text-sm" style={{ color: '#555' }}>
+                  {t('noImages')}
                 </p>
               </div>
             )}
@@ -188,7 +190,7 @@ export default function Portfolio() {
         {lightboxImg && (
           <div
             className="fixed inset-0 z-50 flex items-center justify-center p-4"
-            style={{ background: "rgba(0,0,0,0.95)" }}
+            style={{ background: 'rgba(0,0,0,0.95)' }}
             onClick={() => setLightboxImg(null)}
           >
             <button
