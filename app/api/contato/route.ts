@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import { contactSchema } from "@/lib/validators";
-import { appendLead } from "@/lib/sheets";
 import { sendLeadEmail } from "@/lib/resend";
 
 export async function POST(request: NextRequest) {
@@ -15,13 +14,9 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const { nome, whatsapp, email } = parsed.data;
+    const { nome, whatsapp, email, mensagem } = parsed.data;
 
-    // Run Sheets and email in parallel
-    await Promise.all([
-      appendLead({ nome, whatsapp, email }),
-      sendLeadEmail({ nome, whatsapp, email }),
-    ]);
+    await sendLeadEmail({ nome, whatsapp, email, mensagem });
 
     return NextResponse.json({ success: true });
   } catch (error) {

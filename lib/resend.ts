@@ -4,6 +4,7 @@ export async function sendLeadEmail(data: {
   nome: string;
   whatsapp: string;
   email: string;
+  mensagem?: string;
 }) {
   const resend = new Resend(process.env.RESEND_API_KEY);
   await resend.emails.send({
@@ -23,9 +24,13 @@ export async function sendLeadEmail(data: {
             <td style="padding: 12px 0; border-bottom: 1px solid #333;">${data.whatsapp}</td>
           </tr>
           <tr>
-            <td style="padding: 12px 0; color: #90e5e6; font-weight: bold;">Email</td>
-            <td style="padding: 12px 0;">${data.email}</td>
+            <td style="padding: 12px 0; border-bottom: ${data.mensagem ? '1px solid #333' : 'none'}; color: #90e5e6; font-weight: bold;">Email</td>
+            <td style="padding: 12px 0; border-bottom: ${data.mensagem ? '1px solid #333' : 'none'};">${data.email}</td>
           </tr>
+          ${data.mensagem ? `<tr>
+            <td style="padding: 12px 0; color: #90e5e6; font-weight: bold; vertical-align: top;">Mensagem</td>
+            <td style="padding: 12px 0; white-space: pre-wrap;">${data.mensagem}</td>
+          </tr>` : ''}
         </table>
         <p style="margin-top: 24px; color: #888; font-size: 14px;">Enviado via kahmo.com.br</p>
       </div>

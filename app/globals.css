@@ -34,6 +34,36 @@ body {
   color: #191919;
 }
 
+/* TT Ramillas — colocar o arquivo em public/fonts/TT-Ramillas.ttf */
+@font-face {
+  font-family: "TT Ramillas";
+  src: url("/fonts/TT Ramillas Trial Black.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Hero entrance animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes floatPulse {
+  0%, 100% { box-shadow: 0 8px 32px rgba(255, 165, 218, 0.35); }
+  50%       { box-shadow: 0 8px 48px rgba(255, 165, 218, 0.60); }
+}
+
+.hero-animate {
+  animation: fadeInUp 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
