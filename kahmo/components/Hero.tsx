@@ -214,13 +214,6 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Scroll indicator */}
-      <div className="relative z-10 flex flex-col items-center gap-2 pb-4 opacity-40 hero-animate" style={{ animationDelay: '500ms' }}>
-        <span className="text-xs uppercase tracking-widest" style={{ color: '#888' }}>
-          {t('scroll')}
-        </span>
-        <div className="w-px h-10 animate-pulse" style={{ background: '#ffa5da' }} />
-      </div>
     </section>
   );
 }
