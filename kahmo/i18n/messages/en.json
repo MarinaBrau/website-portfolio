@@ -1,11 +1,10 @@
 {
   "hero": {
     "nav": {
-      "budget": "Budget"
+      "budget": "Get a Quote"
     },
     "label": "Creative Portfolio",
     "subtitle": "I transform brands into unique digital experiences with creativity and strategy.",
-    "scroll": "scroll",
     "skills": ["Social Media", "Design", "Visual Identity"]
   },
   "about": {
@@ -34,7 +33,7 @@
         "number": "01",
         "title": "Scriptwriting",
         "description": "Creative scripts for Reels, Stories and YouTube. Content that grabs attention and communicates clearly.",
-        "items": ["Reels Scripts", "YouTube Scripts", "Copywriting"]
+        "items": ["Reel Scripts", "YouTube Scripts", "Copywriting"]
       },
       {
         "number": "02",
@@ -74,7 +73,7 @@
     "eyebrow": "Let's work together",
     "heading1": "Get a",
     "heading2": "quote",
-    "description": "Fill in the form and I'll get back to you within 24h.",
+    "description": "Fill out the form and I'll get back to you within 24h.",
     "placeholderName": "Full name *",
     "placeholderWhatsapp": "WhatsApp (with area code) *",
     "placeholderEmail": "Email *",
@@ -88,13 +87,13 @@
     "submit": "Request a quote →",
     "divider": "or",
     "booking": "Schedule a conversation",
-    "bookingHint": "Choose the best day and time directly in the calendar"
+    "bookingHint": "Pick the best day and time right in the calendar"
   },
   "footer": {
     "copyright": "© {year} Kamilla Freitas. All rights reserved."
   },
   "floatingButton": {
-    "label": "Quote",
+    "label": "Get a Quote",
     "ariaLabel": "Request a quote"
   },
   "obrigado": {
