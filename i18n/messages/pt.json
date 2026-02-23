@@ -1,0 +1,118 @@
+{
+  "hero": {
+    "nav": {
+      "budget": "Get a Quote"
+    },
+    "label": "Portfolio Criativo",
+    "subtitle": "Transformo marcas em experiências digitais únicas com criatividade e estratégia.",
+    "skills": ["Social Media", "Design", "Identidade Visual"]
+  },
+  "about": {
+    "eyebrow": "Sobre mim",
+    "headingLine1": "Quem está",
+    "headingPink": "por trás",
+    "headingLine3": "do conteúdo",
+    "bio1": "Sou Kamilla Freitas, especialista em comunicação criativa e estratégia digital. Com formação em Design e anos de experiência gerenciando redes sociais de marcas nacionais e internacionais, crio conteúdo que conecta, engaja e converte.",
+    "bio2": "Acredito que cada marca tem uma história única para contar, e meu trabalho é encontrar a melhor forma de contá-la — visualmente, estrategicamente e com personalidade.",
+    "photoPlaceholder": "Foto da Kamilla",
+    "badge": "+5 anos de experiência",
+    "skills": [
+      "Roteiro & Copywriting",
+      "Identidade Visual",
+      "Design Gráfico",
+      "Gestão de Social Media",
+      "Estratégia de Conteúdo",
+      "Edição de Vídeo"
+    ]
+  },
+  "services": {
+    "eyebrow": "O que eu faço",
+    "heading": "Serviços",
+    "items": [
+      {
+        "number": "01",
+        "title": "Roteiro",
+        "description": "Scripts criativos para Reels, Stories e YouTube. Conteúdo que prende a atenção e comunica com clareza.",
+        "items": ["Roteiro para Reels", "Script para YouTube", "Copywriting"]
+      },
+      {
+        "number": "02",
+        "title": "Identidade Visual",
+        "description": "Criação de marca do zero: logo, paleta de cores, tipografia e guia de uso. Tudo alinhado à personalidade do seu negócio.",
+        "items": ["Logo e marca", "Manual de identidade", "Templates"]
+      },
+      {
+        "number": "03",
+        "title": "Design Gráfico",
+        "description": "Posts, stories, banners e materiais visuais com consistência e impacto. Design que faz sua marca ser reconhecida.",
+        "items": ["Posts para redes sociais", "Stories & Reels", "Artes digitais"]
+      },
+      {
+        "number": "04",
+        "title": "Social Media",
+        "description": "Gestão completa das suas redes: planejamento editorial, produção de conteúdo, publicação e análise de métricas.",
+        "items": ["Gestão de Instagram", "Planejamento editorial", "Relatórios"]
+      }
+    ]
+  },
+  "portfolio": {
+    "eyebrow": "Trabalhos",
+    "heading": "Portfolio",
+    "catAll": "Todos",
+    "catSocialMedia": "Social Media",
+    "catIdentidadeVisual": "Identidade Visual",
+    "catDesignGrafico": "Design Gráfico",
+    "catRoteiro": "Roteiro",
+    "toggleOpen": "↓ Ver trabalhos",
+    "toggleClose": "↑ Fechar",
+    "closeButton": "✕ Fechar",
+    "noImages": "Imagens em breve"
+  },
+  "socialMedia": {
+    "eyebrow": "Contas gerenciadas",
+    "heading1": "Social",
+    "heading2": "Media",
+    "followersLabel": "seguidores"
+  },
+  "contact": {
+    "eyebrow": "Vamos trabalhar juntos",
+    "heading1": "Faça um",
+    "heading2": "orçamento",
+    "description": "Preencha o formulário e entro em contato em até 24h.",
+    "placeholderName": "Nome completo *",
+    "placeholderWhatsapp": "WhatsApp (com DDD) *",
+    "placeholderEmail": "Email *",
+    "placeholderMessage": "Mensagem (opcional)",
+    "errorName": "Nome deve ter pelo menos 2 caracteres",
+    "errorWhatsapp": "WhatsApp inválido (inclua DDD)",
+    "errorEmail": "Email inválido",
+    "errorGeneral": "Erro ao enviar. Tente novamente.",
+    "errorConnection": "Erro de conexão. Tente novamente.",
+    "sending": "Enviando...",
+    "submit": "Solicitar orçamento →",
+    "divider": "ou",
+    "booking": "Agendar uma conversa",
+    "bookingHint": "Escolha o melhor dia e horário direto na agenda"
+  },
+  "footer": {
+    "copyright": "© {year} Kamilla Freitas. Todos os direitos reservados."
+  },
+  "floatingButton": {
+    "label": "Get a Quote",
+    "ariaLabel": "Get a Quote"
+  },
+  "obrigado": {
+    "eyebrow": "Mensagem recebida!",
+    "heading1": "Obrigada",
+    "heading2": "pelo contato",
+    "body": "Recebi sua mensagem e entrarei em contato em até 24h pelo WhatsApp ou email que você informou.",
+    "backHome": "Voltar ao início",
+    "instagram": "Instagram →"
+  },
+  "meta": {
+    "title": "Kamilla Freitas — Social Media & Design",
+    "description": "Especialista em social media, identidade visual e design gráfico. Transformo marcas em experiências digitais únicas.",
+    "obrigadoTitle": "Obrigada! — kahmo",
+    "obrigadoDescription": "Mensagem recebida. Entrarei em contato em breve."
+  }
+}

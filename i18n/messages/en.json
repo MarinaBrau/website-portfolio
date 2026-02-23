@@ -1,0 +1,118 @@
+{
+  "hero": {
+    "nav": {
+      "budget": "Get a Quote"
+    },
+    "label": "Creative Portfolio",
+    "subtitle": "I transform brands into unique digital experiences with creativity and strategy.",
+    "skills": ["Social Media", "Design", "Visual Identity"]
+  },
+  "about": {
+    "eyebrow": "About me",
+    "headingLine1": "The person",
+    "headingPink": "behind",
+    "headingLine3": "the content",
+    "bio1": "I'm Kamilla Freitas, a specialist in creative communication and digital strategy. With a background in Design and years of experience managing social media for national and international brands, I create content that connects, engages, and converts.",
+    "bio2": "I believe every brand has a unique story to tell, and my job is to find the best way to tell it — visually, strategically, and with personality.",
+    "photoPlaceholder": "Kamilla's Photo",
+    "badge": "+5 years of experience",
+    "skills": [
+      "Scriptwriting & Copywriting",
+      "Visual Identity",
+      "Graphic Design",
+      "Social Media Management",
+      "Content Strategy",
+      "Video Editing"
+    ]
+  },
+  "services": {
+    "eyebrow": "What I do",
+    "heading": "Services",
+    "items": [
+      {
+        "number": "01",
+        "title": "Scriptwriting",
+        "description": "Creative scripts for Reels, Stories and YouTube. Content that grabs attention and communicates clearly.",
+        "items": ["Reels Scripts", "YouTube Scripts", "Copywriting"]
+      },
+      {
+        "number": "02",
+        "title": "Visual Identity",
+        "description": "Brand creation from scratch: logo, color palette, typography and usage guide. All aligned with your business personality.",
+        "items": ["Logo & branding", "Brand guidelines", "Templates"]
+      },
+      {
+        "number": "03",
+        "title": "Graphic Design",
+        "description": "Posts, stories, banners and visual materials with consistency and impact. Design that makes your brand stand out.",
+        "items": ["Social media posts", "Stories & Reels", "Digital artwork"]
+      },
+      {
+        "number": "04",
+        "title": "Social Media",
+        "description": "Full management of your networks: editorial planning, content production, publishing and metrics analysis.",
+        "items": ["Instagram management", "Editorial planning", "Reports"]
+      }
+    ]
+  },
+  "portfolio": {
+    "eyebrow": "Work",
+    "heading": "Portfolio",
+    "catAll": "All",
+    "catSocialMedia": "Social Media",
+    "catIdentidadeVisual": "Visual Identity",
+    "catDesignGrafico": "Graphic Design",
+    "catRoteiro": "Scriptwriting",
+    "toggleOpen": "↓ View work",
+    "toggleClose": "↑ Close",
+    "closeButton": "✕ Close",
+    "noImages": "Images coming soon"
+  },
+  "socialMedia": {
+    "eyebrow": "Managed accounts",
+    "heading1": "Social",
+    "heading2": "Media",
+    "followersLabel": "followers"
+  },
+  "contact": {
+    "eyebrow": "Let's work together",
+    "heading1": "Get a",
+    "heading2": "quote",
+    "description": "Fill in the form and I'll get back to you within 24h.",
+    "placeholderName": "Full name *",
+    "placeholderWhatsapp": "WhatsApp (with area code) *",
+    "placeholderEmail": "Email *",
+    "placeholderMessage": "Message (optional)",
+    "errorName": "Name must be at least 2 characters",
+    "errorWhatsapp": "Invalid WhatsApp (include area code)",
+    "errorEmail": "Invalid email",
+    "errorGeneral": "Error sending. Please try again.",
+    "errorConnection": "Connection error. Please try again.",
+    "sending": "Sending...",
+    "submit": "Request a quote →",
+    "divider": "or",
+    "booking": "Schedule a conversation",
+    "bookingHint": "Choose the best day and time directly in the calendar"
+  },
+  "footer": {
+    "copyright": "© {year} Kamilla Freitas. All rights reserved."
+  },
+  "floatingButton": {
+    "label": "Get a Quote",
+    "ariaLabel": "Get a quote"
+  },
+  "obrigado": {
+    "eyebrow": "Message received!",
+    "heading1": "Thank you",
+    "heading2": "for reaching out",
+    "body": "I received your message and will contact you within 24h via WhatsApp or the email you provided.",
+    "backHome": "Back to home",
+    "instagram": "Instagram →"
+  },
+  "meta": {
+    "title": "Kamilla Freitas — Social Media & Design",
+    "description": "Social media specialist, visual identity and graphic design. I transform brands into unique digital experiences.",
+    "obrigadoTitle": "Thank you! — kahmo",
+    "obrigadoDescription": "Message received. I'll be in touch soon."
+  }
+}
