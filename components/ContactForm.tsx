@@ -1,74 +1,54 @@
 'use client';
 
 import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
 import { useRouter } from '@/i18n/navigation';
+import { contactSchema, type ContactSchema } from '@/lib/validators';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
 
-interface FormState {
-  nome: string;
-  whatsapp: string;
-  email: string;
-  mensagem: string;
-}
-
-interface FormErrors {
-  nome?: string;
-  whatsapp?: string;
-  email?: string;
-  general?: string;
-}
+const inputClass =
+  'w-full border rounded-xl px-5 py-4 text-sm outline-none transition-all duration-200 placeholder:text-[#666] bg-[#242424] text-[#e9e8e9] border-[#3a3a3a] focus:border-[#ffa5da] aria-invalid:border-[#ff0196] focus:aria-invalid:border-[#ff0196]';
 
 export default function ContactForm() {
   const t = useTranslations('contact');
   const router = useRouter();
-  const [form, setForm] = useState<FormState>({ nome: '', whatsapp: '', email: '', mensagem: '' });
-  const [errors, setErrors] = useState<FormErrors>({});
   const [loading, setLoading] = useState(false);
+  const [generalError, setGeneralError] = useState('');
 
-  function validate(): boolean {
-    const newErrors: FormErrors = {};
-    if (!form.nome.trim() || form.nome.trim().length < 2) {
-      newErrors.nome = t('errorName');
-    }
-    if (!form.whatsapp.trim() || form.whatsapp.replace(/\D/g, '').length < 10) {
-      newErrors.whatsapp = t('errorWhatsapp');
-    }
-    if (!form.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
-      newErrors.email = t('errorEmail');
-    }
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  }
+  const form = useForm<ContactSchema>({
+    resolver: zodResolver(contactSchema),
+  });
 
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    if (!validate()) return;
+  async function onSubmit(data: ContactSchema) {
     setLoading(true);
-    setErrors({});
-
+    setGeneralError('');
     try {
       const res = await fetch('/api/contato', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...form, mensagem: form.mensagem || undefined }),
+        body: JSON.stringify({ ...data, mensagem: data.mensagem || undefined }),
       });
       if (res.ok) {
         router.push('/obrigado');
       } else {
-        const data = await res.json();
-        setErrors({ general: data.message ?? t('errorGeneral') });
+        const json = await res.json();
+        setGeneralError(json.message ?? t('errorGeneral'));
       }
     } catch {
-      setErrors({ general: t('errorConnection') });
+      setGeneralError(t('errorConnection'));
     } finally {
       setLoading(false);
     }
   }
-
-  const inputClass = `
-    w-full border rounded-xl px-5 py-4 text-sm outline-none transition-all duration-200
-    placeholder:text-[#666]
-  `;
 
   return (
     <section id="contato" className="px-6 md:px-12 lg:px-20 py-24 md:py-32">
@@ -99,140 +79,113 @@ export default function ContactForm() {
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="space-y-4" noValidate>
-          {/* Nome */}
-          <div>
-            <input
-              type="text"
-              placeholder={t('placeholderName')}
-              value={form.nome}
-              onChange={(e) => setForm({ ...form, nome: e.target.value })}
-              className={inputClass}
-              style={{
-                background: '#242424',
-                borderColor: errors.nome ? '#ff0196' : '#3a3a3a',
-                color: '#e9e8e9',
-              }}
-              onFocus={(e) => {
-                if (!errors.nome)
-                  (e.target as HTMLInputElement).style.borderColor = '#ffa5da';
-              }}
-              onBlur={(e) => {
-                if (!errors.nome)
-                  (e.target as HTMLInputElement).style.borderColor = '#3a3a3a';
-              }}
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4" noValidate>
+            {/* Nome */}
+            <FormField
+              control={form.control}
+              name="nome"
+              render={({ field }) => (
+                <FormItem className="gap-1">
+                  <FormLabel className="sr-only">{t('placeholderName')}</FormLabel>
+                  <FormControl>
+                    <input
+                      type="text"
+                      placeholder={t('placeholderName')}
+                      className={inputClass}
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage className="text-xs ml-1" style={{ color: '#ff0196' }} />
+                </FormItem>
+              )}
             />
-            {errors.nome && (
-              <p className="text-xs mt-1.5 ml-1" style={{ color: '#ff0196' }}>
-                {errors.nome}
-              </p>
+
+            {/* WhatsApp */}
+            <FormField
+              control={form.control}
+              name="whatsapp"
+              render={({ field }) => (
+                <FormItem className="gap-1">
+                  <FormLabel className="sr-only">{t('placeholderWhatsapp')}</FormLabel>
+                  <FormControl>
+                    <input
+                      type="tel"
+                      placeholder={t('placeholderWhatsapp')}
+                      className={inputClass}
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage className="text-xs ml-1" style={{ color: '#ff0196' }} />
+                </FormItem>
+              )}
+            />
+
+            {/* Email */}
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem className="gap-1">
+                  <FormLabel className="sr-only">{t('placeholderEmail')}</FormLabel>
+                  <FormControl>
+                    <input
+                      type="email"
+                      placeholder={t('placeholderEmail')}
+                      className={inputClass}
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage className="text-xs ml-1" style={{ color: '#ff0196' }} />
+                </FormItem>
+              )}
+            />
+
+            {/* Mensagem (opcional) */}
+            <FormField
+              control={form.control}
+              name="mensagem"
+              render={({ field }) => (
+                <FormItem className="gap-1">
+                  <FormLabel className="sr-only">{t('placeholderMessage')}</FormLabel>
+                  <FormControl>
+                    <textarea
+                      placeholder={t('placeholderMessage')}
+                      rows={4}
+                      className={`${inputClass} resize-none`}
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage className="text-xs ml-1" style={{ color: '#ff0196' }} />
+                </FormItem>
+              )}
+            />
+
+            {/* General error */}
+            {generalError && (
+              <div
+                className="p-4 rounded-xl text-sm text-center"
+                style={{ background: '#ff019620', color: '#ff0196' }}
+              >
+                {generalError}
+              </div>
             )}
-          </div>
 
-          {/* WhatsApp */}
-          <div>
-            <input
-              type="tel"
-              placeholder={t('placeholderWhatsapp')}
-              value={form.whatsapp}
-              onChange={(e) => setForm({ ...form, whatsapp: e.target.value })}
-              className={inputClass}
+            {/* Submit */}
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full py-4 rounded-xl font-bold uppercase tracking-widest text-sm transition-all duration-300 hover:opacity-90 hover:scale-[1.01] disabled:opacity-50 disabled:cursor-not-allowed"
               style={{
-                background: '#242424',
-                borderColor: errors.whatsapp ? '#ff0196' : '#3a3a3a',
-                color: '#e9e8e9',
+                background: '#ffa5da',
+                color: '#191919',
+                fontFamily: 'var(--font-space-grotesk)',
               }}
-              onFocus={(e) => {
-                if (!errors.whatsapp)
-                  (e.target as HTMLInputElement).style.borderColor = '#ffa5da';
-              }}
-              onBlur={(e) => {
-                if (!errors.whatsapp)
-                  (e.target as HTMLInputElement).style.borderColor = '#3a3a3a';
-              }}
-            />
-            {errors.whatsapp && (
-              <p className="text-xs mt-1.5 ml-1" style={{ color: '#ff0196' }}>
-                {errors.whatsapp}
-              </p>
-            )}
-          </div>
-
-          {/* Email */}
-          <div>
-            <input
-              type="email"
-              placeholder={t('placeholderEmail')}
-              value={form.email}
-              onChange={(e) => setForm({ ...form, email: e.target.value })}
-              className={inputClass}
-              style={{
-                background: '#242424',
-                borderColor: errors.email ? '#ff0196' : '#3a3a3a',
-                color: '#e9e8e9',
-              }}
-              onFocus={(e) => {
-                if (!errors.email)
-                  (e.target as HTMLInputElement).style.borderColor = '#ffa5da';
-              }}
-              onBlur={(e) => {
-                if (!errors.email)
-                  (e.target as HTMLInputElement).style.borderColor = '#3a3a3a';
-              }}
-            />
-            {errors.email && (
-              <p className="text-xs mt-1.5 ml-1" style={{ color: '#ff0196' }}>
-                {errors.email}
-              </p>
-            )}
-          </div>
-
-          {/* Mensagem (opcional) */}
-          <div>
-            <textarea
-              placeholder={t('placeholderMessage')}
-              value={form.mensagem}
-              onChange={(e) => setForm({ ...form, mensagem: e.target.value })}
-              rows={4}
-              className={`${inputClass} resize-none`}
-              style={{
-                background: '#242424',
-                borderColor: '#3a3a3a',
-                color: '#e9e8e9',
-              }}
-              onFocus={(e) => {
-                (e.target as HTMLTextAreaElement).style.borderColor = '#ffa5da';
-              }}
-              onBlur={(e) => {
-                (e.target as HTMLTextAreaElement).style.borderColor = '#3a3a3a';
-              }}
-            />
-          </div>
-
-          {/* General error */}
-          {errors.general && (
-            <div
-              className="p-4 rounded-xl text-sm text-center"
-              style={{ background: '#ff019620', color: '#ff0196' }}
             >
-              {errors.general}
-            </div>
-          )}
-
-          {/* Submit */}
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full py-4 rounded-xl font-bold uppercase tracking-widest text-sm transition-all duration-300 hover:opacity-90 hover:scale-[1.01] disabled:opacity-50 disabled:cursor-not-allowed"
-            style={{
-              background: '#ffa5da',
-              color: '#191919',
-              fontFamily: 'var(--font-space-grotesk)',
-            }}
-          >
-            {loading ? t('sending') : t('submit')}
-          </button>
-        </form>
+              {loading ? t('sending') : t('submit')}
+            </button>
+          </form>
+        </Form>
 
         {/* Divider */}
         <div className="flex items-center gap-4 my-8">
