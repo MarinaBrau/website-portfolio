@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #191919;
+  --color-pink: #ffa5da;
+  --color-pink-hot: #ff0196;
+  --color-cyan: #90e5e6;
+  --color-purple: #a95ae6;
+  --color-green: #66cb35;
+  --color-olive: #c6c82e;
+  --color-light-gray: #e9e8e9;
+
+  --font-display: var(--font-space-grotesk);
+  --font-body: var(--font-inter);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #191919;
+  color: #e9e8e9;
+  font-family: var(--font-inter), Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background-color: #ffa5da;
+  color: #191919;
+}
+
+/* TT Ramillas — colocar o arquivo em public/fonts/TT-Ramillas.ttf */
+@font-face {
+  font-family: "TT Ramillas";
+  src: url("/fonts/TT Ramillas Trial Black.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Hero entrance animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes floatPulse {
+  0%, 100% { box-shadow: 0 8px 32px rgba(255, 165, 218, 0.35); }
+  50%       { box-shadow: 0 8px 48px rgba(255, 165, 218, 0.60); }
+}
+
+.hero-animate {
+  animation: fadeInUp 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #191919;
+}
+::-webkit-scrollbar-thumb {
+  background: #ffa5da;
+  border-radius: 3px;
+}
